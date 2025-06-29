@@ -11,7 +11,7 @@ def load_text(path: str) -> str:
 def ask_question(context: str, question: str) -> str:
     prompt = f"Contexto:\n{context}\n\nPergunta: {question}\nResposta:"
     response = openai.Completion.create(
-        engine="text-davinci-003",
+        engine="o4-mini-2025-04-16",
         prompt=prompt,
         max_tokens=150,
     )
