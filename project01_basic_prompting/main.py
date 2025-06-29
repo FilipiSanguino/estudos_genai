@@ -9,13 +9,16 @@ def load_text(path: str) -> str:
 
 
 def ask_question(context: str, question: str) -> str:
-    prompt = f"Contexto:\n{context}\n\nPergunta: {question}\nResposta:"
-    response = openai.Completion.create(
-        engine="o4-mini-2025-04-16",
-        prompt=prompt,
+    messages = [
+        {"role": "system", "content": "Contexto:\n" + context},
+        {"role": "user", "content": question},
+    ]
+    response = openai.ChatCompletion.create(
+        model="o4-mini-2025-04-16",
+        messages=messages,
         max_tokens=150,
     )
-    return response.choices[0].text.strip()
+    return response.choices[0].message["content"].strip()
 
 
 def main():
